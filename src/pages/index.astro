@@ -1,11 +1,80 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+	<main class="relative isolate flex h-dvh flex-col overflow-hidden bg-white text-[#111111]">
+		<div class="ambient ambient-one" aria-hidden="true"></div>
+		<div class="ambient ambient-two" aria-hidden="true"></div>
+		<div class="grid-overlay" aria-hidden="true"></div>
+
+		<nav class="mx-auto flex w-[calc(100%-2.5rem)] max-w-[1180px] items-center justify-between pt-6 sm:w-[calc(100%-4rem)] sm:pt-8" aria-label="Navegación principal">
+			<a class="block" href="/" aria-label="Ariga Corp, inicio">
+				<img class="block w-[120px] sm:w-[145px]" src="/img/logo.png" alt="Ariga Corp S.A.C.S." />
+			</a>
+			<span class="rounded-full border border-[#e0003c]/40 px-3 py-2 text-[.62rem] uppercase tracking-[.2em] text-[#e0003c] sm:px-4 sm:text-[.68rem]">Próximamente</span>
+		</nav>
+
+		<section class="mx-auto my-auto w-[calc(100%-2.5rem)] max-w-[780px] -translate-y-[clamp(1rem,4vh,3rem)] py-[clamp(.75rem,4vh,3rem)] text-center sm:w-[calc(100%-4rem)]" aria-labelledby="page-title">
+			<div class="reveal mb-[clamp(.75rem,2vh,1.25rem)] flex items-center justify-center gap-2.5 text-[.6rem] font-semibold uppercase tracking-[.16em] text-[#e0003c] sm:text-[.7rem]"><span class="pulse size-2 rounded-full bg-[#e0003c]"></span> Estamos construyendo algo grande</div>
+			<h1 class="reveal max-w-[720px] text-[clamp(2.4rem,7vw,6rem)] font-medium leading-[.94] tracking-[-.075em] [animation-delay:120ms]" id="page-title">Una nueva forma<br /><em class="text-[#e0003c] not-italic">de hacer las cosas.</em></h1>
+			<p class="reveal mx-auto my-[clamp(.75rem,2.5vh,1.5rem)] max-w-[430px] text-[clamp(.8rem,1.8vw,1rem)] leading-[1.45] text-black/60 [animation-delay:240ms] sm:mb-[clamp(1.5rem,4vh,2.5rem)]">
+				Nuestra nueva experiencia digital está tomando forma. Estamos afinando cada detalle
+				para recibirte como mereces.
+			</p>
+
+			<div class="reveal mx-auto max-w-[480px] [animation-delay:360ms]" aria-label="Avance del desarrollo">
+				<div class="mb-3 flex justify-between text-xs tracking-[.05em] text-black/55"><span>Construcción en progreso</span><strong class="font-semibold text-black">75%</strong></div>
+				<div class="h-[5px] overflow-hidden rounded-full bg-black/10"><span class="progress-bar block h-full w-3/4 rounded-full bg-[#e0003c]"></span></div>
+			</div>
+
+			<div class="reveal mx-auto mt-[clamp(1rem,3.5vh,3rem)] flex w-fit items-center gap-3 rounded-2xl border border-black/10 bg-black/[.03] p-2.5 pr-3.5 text-left [animation-delay:480ms] sm:gap-4 sm:p-4 sm:pr-5">
+				<div class="sparkle grid size-10 shrink-0 place-items-center rounded-xl bg-[#e0003c] text-xl text-white" aria-hidden="true">✦</div>
+				<div>
+					<strong class="block text-[.8rem] text-black sm:text-[.85rem]">Estamos preparando el lanzamiento</strong>
+					<span class="mt-1 block text-[.7rem] text-black/55">Vuelve pronto para conocer todo lo nuevo.</span>
+				</div>
+			</div>
+		</section>
+
+		<footer class="mx-auto flex w-[calc(100%-2.5rem)] flex-col items-start gap-2 pb-4 text-[.6rem] uppercase tracking-[.16em] text-black/35 sm:w-[calc(100%-4rem)] sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:pb-8 sm:text-[.63rem]">
+			<span>ARIGA CORP S.A.C.S.</span>
+			<span class="hidden h-px w-20 bg-black/15 sm:block"></span>
+			<span>Innovación con propósito</span>
+		</footer>
+	</main>
 </Layout>
+
+<style>
+	.ambient, .grid-overlay { position: absolute; pointer-events: none; z-index: -1; }
+	.ambient { border-radius: 50%; filter: blur(2px); }
+	.ambient-one {
+		width: 38rem; height: 38rem; top: -18rem; right: -8rem; background: #e0003c; opacity: .16;
+		animation: drift 12s ease-in-out infinite alternate;
+	}
+	.ambient-two {
+		width: 24rem; height: 24rem; bottom: -13rem; left: -7rem; background: #e0003c; opacity: .1;
+		animation: drift 15s ease-in-out -4s infinite alternate-reverse;
+	}
+	.grid-overlay {
+		inset: 0; opacity: .08;
+		background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px);
+		background-size: 4.5rem 4.5rem;
+	}
+	.reveal { animation: reveal .8s ease both; }
+	.progress-bar { transform-origin: left; animation: grow 1.5s .6s cubic-bezier(.22, 1, .36, 1) both; }
+	.pulse { box-shadow: 0 0 0 0 #e0003c; animation: pulse 2s infinite; }
+	.sparkle { animation: twinkle 2.5s ease-in-out infinite; }
+	@keyframes reveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+	@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+	@keyframes pulse { 70% { box-shadow: 0 0 0 7px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+	@keyframes twinkle { 50% { transform: rotate(12deg) scale(1.08); } }
+	@keyframes drift { to { transform: translate(30px, 20px) scale(1.08); } }
+	@media (max-width: 639px) {
+		.ambient-one { width: 10rem; height: 10rem; top: -4rem; right: -3rem; opacity: .08; }
+		.ambient-two { width: 7rem; height: 7rem; bottom: -2rem; left: -2rem; opacity: .05; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		*, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+	}
+</style>
